@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const FormFields = ({ data, formData, setFormData, submitData }) => {
   const [displayErrors, setDisplayErrors] = useState({});
-  const isEmail = "^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$";
+  const isEmail = "^([a-zA-Z0-9_\.\-])+\@([a-zA-Z0-9\-]+\.)+([a-zA-Z0-9]{2,4})+$";
   const isMobile = "^[6-9][0-9]{9}$";
   const [showPassword,setShowPassword] = useState(true)
 
@@ -13,12 +13,18 @@ const FormFields = ({ data, formData, setFormData, submitData }) => {
   const setData = (e, data) => {
     if (Array.isArray(data.validationRules)) {
       data.validationRules?.forEach((rule)=>{
+        console.log(new RegExp(isEmail).test(e.target.value),'ni')
         if(rule == "isEmail" && isLetter(e.target.value)) {
           const isValidEmail = new RegExp(isEmail).test(e.target.value);
           if (!isValidEmail) {
             setDisplayErrors({
               ...displayErrors,
               [e.target.name]: "Enter a valid email address",
+            });
+          }else{
+             setDisplayErrors({
+              ...displayErrors,
+              [e.target.name]: null,
             });
           }
         }
@@ -29,11 +35,16 @@ const FormFields = ({ data, formData, setFormData, submitData }) => {
               ...displayErrors,
               [e.target.name]: "Enter a valid phone number",
             });
+          }else{
+            setDisplayErrors({
+              ...displayErrors,
+              [e.target.name]: null,
+            });
           }
         }
       })
     } else {
-      console.log(new RegExp(data.validationRules).test(e.target.value),'rulkes',new RegExp(data.validationRules))
+      // console.log(new RegExp(data.validationRules).test(e.target.value),'rulkes',new RegExp(data.validationRules))
       if (new RegExp(data.validationRules).test(e.target.value)) {
        
         setDisplayErrors({ ...displayErrors, [e.target.name]: null });
@@ -80,7 +91,7 @@ const showPasswordFn = (id) =>{
               data?.name=="password" || data?.name == "confirmPassword" ?
               <span onClick={()=>showPasswordFn(data?.name)}>{showPassword?"Show":"Hide"}</span> : null
             }
-            {displayErrors[data.name] ? (
+            {displayErrors[data.name] && formData[data.name].length>0 ? (
               <span>{displayErrors[data.name]}</span>
             ) : null}
           </div>
