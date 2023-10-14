@@ -1,9 +1,9 @@
 import React from "react";
 
 const FormFields = ({ data , formData , setFormData , submitData}) => {
-  console.log(data, "input array");
-  const setData = (e) => {
-    console.log(e.target.name, e.target.value)
+  const setData = (e,rules) => {
+    // console.log(e.target.name, e.target.value)
+    console.log(Array.isArray(rules), rules,"input array");
     setFormData({...formData,[e.target.name]:e.target.value});
   }
 
@@ -18,7 +18,7 @@ const FormFields = ({ data , formData , setFormData , submitData}) => {
                 placeholder={data.label}
                 name={data.name}
                 value={formData?.data?.name}
-                onChange={(e) => setData(e)}
+                onChange={(e) => setData(e,data.validationRules)}
               />
             </div>
           );
