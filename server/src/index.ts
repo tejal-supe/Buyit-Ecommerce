@@ -5,6 +5,7 @@ import compression from "compression"
 
 const app = express();
 const PORT = 5000;
+const MONGO_URL = "mongodb+srv://tejal123supe:A6sGmmgaUzxtBUuf@cluster0.tsmyeif.mongodb.net/?retryWrites=true&w=majority"
 app.use(cors({
     credentials:true
 }))
@@ -19,3 +20,6 @@ app.get("/",(req,res)=>{
 app.listen(PORT,()=>{
 console.log(`Server is running on port ${PORT} !!` )
 })
+
+
+// tejal123supe - A6sGmmgaUzxtBUuf
