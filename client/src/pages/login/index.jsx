@@ -3,7 +3,8 @@ import LoginForm from './LoginForm'
 
 const Login = () => {
   return (
-    <div>Login
+    <div className='text-center '>
+      Login
         <LoginForm/>
     </div>
   )

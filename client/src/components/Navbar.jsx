@@ -11,7 +11,7 @@ const Navbar = () => {
           BuyIt
         </div>
         <div className="min-w-[200px] w-[50%]">
-          <input type="text" className="w-[100%] border border-red-600" />
+          <input type="text" className="w-[100%] border border-red-600 rounded-md	h-8" />
         </div>
         <div>
           {isLoggedIn ? (
@@ -52,7 +52,7 @@ const Navbar = () => {
               Cart
             </>
           ) : (
-            <div onClick={()=>navigate('/login')}>Login</div>
+            <div onClick={()=>navigate('/login')} className="cursor-pointer font-bold text-xl text-blue-600">Login</div>
           )}
         </div>
       </div>
