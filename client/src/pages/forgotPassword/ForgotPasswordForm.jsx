@@ -31,12 +31,20 @@ const passwordChange =[
 const ForgotPasswordForm = () => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState({})
+    const [showPasswordFields,setShowPasswordFields] = useState(false)
 
     const submitMail = () =>{
-
+      setShowPasswordFields(true)
+    }
+    const passwordSubmit = () =>{
+        alert("Changed successfully!!")
     }
   return <div>
+    {
+      showPasswordFields?
+      <FormFields data={passwordChange} submitData={passwordSubmit} setFormData={setPassword} formData={password}/> :
     <FormFields data={inputToForm} submitData={submitMail} setFormData={setEmail} formData={email}/>
+    }
   </div>;
 };
 
