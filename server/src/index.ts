@@ -1,18 +1,20 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
-import compression from "compression"
+import compression from "compression";
+import 'dotenv/config'
+import { connectToDb } from "./connection/connect";
 
 const app = express();
 const PORT = 5000;
-const MONGO_URL = "mongodb+srv://tejal123supe:A6sGmmgaUzxtBUuf@cluster0.tsmyeif.mongodb.net/?retryWrites=true&w=majority"
+
 app.use(cors({
     credentials:true
 }))
 app.use(compression());
 app.use(cookieParser());
 app.use(express.json());
-
+connectToDb();
 app.get("/",(req,res)=>{
     res.send("Welcome!");
 })
